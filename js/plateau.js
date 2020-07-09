@@ -1,0 +1,103 @@
+class Plateau {
+
+  posXPosY = new Set();
+ 
+  constructor(nombreDeLigne, nombreDeColonne,nombreCaseInaccessible,nombreArme,nombreJoueur) {
+    this.id = 1;
+    this.nombreDeLigne = nombreDeLigne;
+    this.nombreDeColonne = nombreDeColonne;
+    this.nombreCaseInaccessible = nombreCaseInaccessible;
+    this.nombreArme = nombreArme;
+    this.nombreDeplacementMin = 1;
+    this.nombreDeplacementMax = 3;
+
+    this.dessinerPlateau();
+    /*this.positionCaseInaccessible();*/
+    
+    this.positionElement(nombreCaseInaccessible,"inaccesible");
+    this.positionElement(nombreJoueur,"joueur");
+    this.positionElement(nombreArme,"arme")
+    this.selectionArme();
+  }
+
+  dessinerPlateau() {
+    /*var nombreDeColonnes = $('#nombre-de-colonnes').val();
+    var nombreDeLignes = $('#nombre-de-lignes').val();*/
+    /*alert("on lance le plateau:"+ this.nombreDeLigne+ " "+this.nombreDeColonne);*/
+    for (let indexX = 0; indexX < this.nombreDeLigne; indexX++) {
+      let ligne = `<tr>`;
+      for (let indexY = 0; indexY < this.nombreDeColonne; indexY++) {
+        ligne += `<td id=${indexX + 1}${indexY + 1} class='vide'>${indexX + 1}${indexY + 1}</td>`;
+        caseTest.newCase(`${indexX + 1}${indexY + 1}`,(indexX + 1),(indexY + 1),"V",0,0);
+        /*ligne += `<td id=${indexX + 1}${indexY + 1} class='vide'></td>`;*/
+        /*let caseTest = new Case(`${indexX + 1}${indexY + 1}`,(indexX + 1),(indexY + 1),"V",0,0);
+        console.log(`Id de classe : ${indexX + 1}${indexY + 1}`,(indexX + 1),(indexY + 1),"V",0,0);*/
+        console.log(caseTest.affiche(34));
+      }
+      ligne += `</tr>`;
+      $("#dessin_du_plateau").append(ligne);
+    }
+  }
+  
+  
+  positionElement(nombreElement,elementClasse){
+    console.log("Position element" +(nombreElement,elementClasse));
+    let posX = 0;
+    let posY = 0;
+    console.log(caseTest.affiche(34));
+   
+
+    for (
+      let caseOccupe = 0;
+      caseOccupe < nombreElement;
+      caseOccupe++
+    ) { 
+      do {
+        posX = Math.floor(Math.random() * this.nombreDeLigne) + 1;
+        posY = Math.floor(Math.random() * this.nombreDeColonne) + 1;
+
+      } while (this.posXPosY.has(posX + "" + posY));
+
+      this.posXPosY.add(posX + "" + posY);
+      console.log(posX + "" + posY);
+      if (elementClasse==="joueur" || elementClasse==="arme"){
+        $("#" + posX + "" + posY).attr("class", `${elementClasse}${caseOccupe+1}`);
+        console.log(elementClasse+(caseOccupe+1));
+      } else {
+      $("#" + posX + "" + posY).attr("class", `${elementClasse}`);
+
+      
+      console.log(elementClasse);
+      }
+    }
+  }
+
+
+  
+  /*positionCaseInaccessible() {
+    let posX = 0;
+    let posY = 0;
+    const posXPosY = new Set();
+
+    for (
+      let caseInaccessible = 0;
+      caseInaccessible < this.nombreCaseInaccessible;
+      caseInaccessible++
+    ) {
+      do {
+        posX = Math.floor(Math.random() * this.nombreDeLigne) + 1;
+        posY = Math.floor(Math.random() * this.nombreDeColonne) + 1;
+
+        console.log(posX, posY, caseInaccessible);
+      } while (posXPosY.has(posX + "" + posY));
+
+      posXPosY.add(posX + "" + posY);
+     
+      $("#" + posX + "" + posY).attr("class", "inaccesible");
+    }
+  }*/
+  selectionArme(){
+    let armeEcran = new Arme(1);
+   
+  }
+}

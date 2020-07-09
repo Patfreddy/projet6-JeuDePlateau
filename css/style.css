@@ -1,0 +1,208 @@
+body {
+    background-image: url('../css/images/background2.jpg');
+    background-size: cover;
+    font-family: georgia;
+    background-color: rgba(255,255,255,0.2);    
+    
+  }
+.container {
+
+    display:flex;
+    justify-content:space-around;
+    margin-left:0;
+    margin-right:0;
+    
+
+}
+
+.joueurs{
+    display:flex;
+    flex-direction:column;
+    justify-content:left;
+    margin-left:0;
+    margin-right:0;
+}
+
+#joueur1{
+    margin-top:20px;
+}
+
+
+#joueur1, #joueur2 {
+
+    margin-bottom:20px;
+
+}
+
+.element:nth-child(2)
+{
+    flex: 1;
+}
+
+#dimensionPlateau{
+      display: flex;
+      flex-direction:row;
+ }
+
+ 
+.imageJoueur {
+	width: 80px;
+    height: auto;
+    padding: 10px;
+	margin: 0px 10px 10px 0px;
+}
+
+.imageArme {
+	width: 60px;
+    height: auto;
+    padding-right: 5px;
+   	margin: 0px 0px 0px 0px;
+	
+}
+#valeur_armes{
+    float: left;
+    margin: 20px;
+    text-align: center;
+    background-color:#DBCBB4;
+    border: 1px black solid;
+    padding: 10px;
+}
+
+.vide{
+
+    padding: 10px;
+    border: 1px solid black;
+    height: 30px;
+    width: 30px;
+    background-color: #DBCBB4;
+}
+.inaccesible{
+    padding: 10px;
+    border: 1px solid black;
+    height: 30px;
+    width: 30px;
+    background-image: url('../image/rocher.png');
+    background-size: cover;
+ 
+}
+
+p{
+    margin: 10px;
+}
+#conteneur
+{
+    display: flex;
+    flex-direction: row;
+}
+.titre {
+    font-family: georgia;
+    font-size: 2em;
+    color:#D24309;
+    text-align: center;
+    background-color: #DBCBB4;
+    
+  }
+
+#joueur1{
+    float: left;
+    margin-right: 20px;
+    margin-left: 40px;
+    margin-bottom: 50px;
+    margin-top: 10px;
+    background-color:#5C6215;
+    border: 1px black solid;
+}
+.joueur1{
+    padding: 10px;
+    border: 1px solid black;
+    height: 30px;
+    width: 30px;
+    background-size: cover;
+    background-image: url('../image/joueur1.png');
+    background-color:#5C6215;
+}
+.joueur2{
+    padding: 10px;
+    border: 1px solid black;
+    height: 30px;
+    width: 30px;
+    background-size: cover;
+    background-image: url('../image/joueur1.png');
+    background-color: #E46102;
+}
+.arme1{
+    padding: 10px;
+    border: 1px solid black;
+    height: 30px;
+    width: 30px;
+    background-size: cover;
+    background-image: url('../image/arme1.png');
+  
+}
+.arme2{
+    padding: 10px;
+    border: 1px solid black;
+    height: 30px;
+    width: 30px;
+    background-size: cover;
+    background-image: url('../image/arme2.png');
+  
+}
+.arme3{
+    padding: 10px;
+    border: 1px solid black;
+    height: 30px;
+    width: 30px;
+    background-size: cover;
+    background-image: url('../image/arme3.png');
+  
+}
+.arme4{
+    padding: 10px;
+    border: 1px solid black;
+    height: 30px;
+    width: 30px;
+    background-size: cover;
+    background-image: url('../image/arme4.png');
+   
+}
+
+
+#joueur2{
+    float: left;
+    margin-right: 20px;
+    margin-left: 40px;
+    margin-bottom: 50px;
+    margin-top: 10px;
+    background-color: #E46102;
+    border: 1px black solid;
+}  
+
+
+#dessin_du_plateau {
+    width: 700px;
+    height: 700px;
+    border: 2px black solid;
+    margin: auto;
+    position: relative;
+    background-color: #DBCBB4;
+    z-index: 3;
+  }
+ 
+.choix{
+    background-color: #9D4318;
+    
+}
+.joueur{
+    display:flex;
+}
+
+/* .dessinDuPlateau{
+    width: 700px;
+    height: 600px;
+    border: 2px;
+    text-align: center;    
+} */
+/* position: relative;
+    background-image :url(images/foret-eau.jpg) ;
+   */

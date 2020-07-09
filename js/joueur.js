@@ -1,0 +1,7 @@
+class Joueur{
+
+    constructor(idJoueur){
+
+        
+    }
+}
