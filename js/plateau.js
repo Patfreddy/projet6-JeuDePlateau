@@ -10,6 +10,7 @@ class Plateau {
     this.nombreArme = nombreArme;
     this.nombreDeplacementMin = 1;
     this.nombreDeplacementMax = 3;
+    this.tabCases= [];
 
     this.dessinerPlateau();
     /*this.positionCaseInaccessible();*/
@@ -27,19 +28,47 @@ class Plateau {
     for (let indexX = 0; indexX < this.nombreDeLigne; indexX++) {
       let ligne = `<tr>`;
       for (let indexY = 0; indexY < this.nombreDeColonne; indexY++) {
-        ligne += `<td id=${indexX + 1}${indexY + 1} class='vide'>${indexX + 1}${indexY + 1}</td>`;
-        caseTest.newCase(`${indexX + 1}${indexY + 1}`,(indexX + 1),(indexY + 1),"V",0,0);
-        /*ligne += `<td id=${indexX + 1}${indexY + 1} class='vide'></td>`;*/
-        /*let caseTest = new Case(`${indexX + 1}${indexY + 1}`,(indexX + 1),(indexY + 1),"V",0,0);
-        console.log(`Id de classe : ${indexX + 1}${indexY + 1}`,(indexX + 1),(indexY + 1),"V",0,0);*/
-        console.log(caseTest.affiche(34));
+
+        let newCase = new Case(`${indexX + 1}${indexY + 1}`,indexX + 1,indexY + 1,'vide');
+        ligne += newCase.addCase();
+        this.tabCases.push(newCase);
       }
       ligne += `</tr>`;
       $("#dessin_du_plateau").append(ligne);
     }
+
+    console.log(this.tabCases);
+    console.log("retourne " +this.getCaseById(1010));
+    
   }
   
+  getCaseById(id){
+    let caseFind;
+    this.tabCases.forEach(uneCase => {
+
+      if (uneCase.idCase == id){
+        caseFind = uneCase.etat;
+      
+      }
+      
+    });
+    return caseFind;
+  }
   
+  getCaseByEtat(etat){
+
+    let caseFind;
+    this.tabCases.forEach(uneCase => {
+
+      if (uneCase.idCase == id){
+        caseFind = uneCase.etat;
+      
+      }
+      
+    });
+    return caseFind;
+  }
+
   positionElement(nombreElement,elementClasse){
     console.log("Position element" +(nombreElement,elementClasse));
     let posX = 0;
@@ -74,28 +103,7 @@ class Plateau {
 
 
   
-  /*positionCaseInaccessible() {
-    let posX = 0;
-    let posY = 0;
-    const posXPosY = new Set();
-
-    for (
-      let caseInaccessible = 0;
-      caseInaccessible < this.nombreCaseInaccessible;
-      caseInaccessible++
-    ) {
-      do {
-        posX = Math.floor(Math.random() * this.nombreDeLigne) + 1;
-        posY = Math.floor(Math.random() * this.nombreDeColonne) + 1;
-
-        console.log(posX, posY, caseInaccessible);
-      } while (posXPosY.has(posX + "" + posY));
-
-      posXPosY.add(posX + "" + posY);
-     
-      $("#" + posX + "" + posY).attr("class", "inaccesible");
-    }
-  }*/
+ 
   selectionArme(){
     let armeEcran = new Arme(1);
    
