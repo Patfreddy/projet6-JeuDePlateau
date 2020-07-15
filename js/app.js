@@ -10,7 +10,11 @@ $(document).ready(function() {
        
         let plateau = new Plateau(10,10,10,4,2);
     
-        
+        let caseJoueur1 = new Case();
+        let [idJoueur1X,idjoueur1Y] = caseJoueur1.getCaseByEtat("joueur1");
+       
+        console.log("idjoueur1 :"+ idJoueur1X+""+idjoueur1Y);
+        caseJoueur1.deplacementJoueur(idJoueur1X,idjoueur1Y,3,joueur1,'#5C6215');
 
 
 

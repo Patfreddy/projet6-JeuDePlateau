@@ -27,13 +27,15 @@ class Case {
 
  /* Méthode pour retrouver la position d'un element en fonction de son etat : joueurs ou armes*/
  getCaseByEtat(etat) {
-    let caseFindEtat;
+    let caseFindEtatPosX;
+    let caseFindEtatPosY;
     tabCases.forEach((uneCase) => {
       if (uneCase.etat == etat) {
-        caseFindEtat = uneCase.posX + "" + uneCase.posY;
+        caseFindEtatPosX = uneCase.posX;
+        caseFindEtatPosY = uneCase.posY;
       }
     });
-    return caseFindEtat;
+    return [caseFindEtatPosX,caseFindEtatPosY];
   }
 
    /*méthode pour modifier l'état d'une case*/
@@ -46,21 +48,22 @@ class Case {
     });
   }
  /*Case couleur pour déplacement*/
-  /*afficherDeplacementJoueur(id){
-     
-    (#id).attr("class", `${elementClasse}${caseOccupe + 1}`);
+  afficherDeplacementJoueur(idCase,couleur){
+    console.log("deplacement  joueur :" + idCase);      
+     $(`#${idCase}`).css('background-color',`${couleur}`);
+   
+ }
 
- }*/
   /*méthode pour controler la position du deuxième joueur */
   recherchePositionJoueur(positionX, positionY) {
     console.log("Retourne joueur :" + positionX, positionY);
     let trouveJoueur = 0;
-    let haut = "";
-    let bas = "";
-    let droite = "";
-    let gauche = "";
+    let haut = `${positionX}${positionY}`;
+    let bas = `${positionX}${positionY}`;
+    let droite = `${positionX}${positionY}`;
+    let gauche = `${positionX}${positionY}`;
 
-    if (positionX == 1) {
+    if (positionX != 1) {
       haut = `${positionX}${positionY}`;
     } else {
       haut = `${positionX - 1}${positionY}`;
@@ -100,69 +103,53 @@ class Case {
     return trouveJoueur;
   }
 
-  deplacementJoueur(positionX,positionY,nombreCaseDeplacement){
+  deplacementJoueur(positionX,positionY,nombreCaseDeplacement,personnage,couleurFond){
    
-        console.log("Retourne joueur :" + positionX, positionY);
-        let trouveJoueur = 0;
-        let haut = "";
-        let bas = "";
-        let droite = "";
-        let gauche = "";
-        let posXDeplacement;
-        let posYDeplacement;
+        console.log("1er deplacement  joueur :" + positionX, positionY);
+       
+        let posXDeplacement = positionX;
+        let posYDeplacement= positionY;
+        let haut = posXDeplacement;
+        let bas = 0;
+        let droite = 0;
+        let gauche = 0;
     
         /*deplacement vers le haut*/
         for (let index = 0; index < 3; index++) {
-            if (positionX == 1) {
-                posXDeplacement = `${positionX}`;
+            if (haut == 1) {
+                posXDeplacement = posXDeplacement;
             } else {
-                posXDeplacement = `${positionX-1}`;
+                posXDeplacement = posXDeplacement-1;
             }
+            console.log("afficher deplacement  joueur :" + index, posXDeplacement, positionY);
             if (this.getCaseById(`${posXDeplacement}${positionY}`)=="vide"){
+                console.log("Couleur de fond :" + `${couleurFond}`);
+                this.afficherDeplacementJoueur(`${posXDeplacement}${positionY}`,`${couleurFond}`);
+            } else {
+                break;
+            }
+            haut =  posXDeplacement
+        }; 
+        
+        /*deplacement vers le bas*/
+
+        for (let index = 0; index < 3; index++) {
+            if (haut == 1) {
+                posXDeplacement = posXDeplacement;
+            } else {
+                posXDeplacement = posXDeplacement-1;
+            }
+            console.log("afficher deplacement  joueur :" + index, posXDeplacement, positionY);
+            if (this.getCaseById(`${posXDeplacement}${positionY}`)=="vide"){
+                console.log("Couleur de fond :" + `${couleurFond}`);
+                this.afficherDeplacementJoueur(`${posXDeplacement}${positionY}`,`${couleurFond}`);
+            } else {
+                break;
+            }
+            haut =  posXDeplacement
+        }; 
 
 
-            }; 
-            
-        }
-      
-        if (positionX == 10) {
-          bas = `${positionX}${positionY}`;
-        } else {
-          bas = positionX + 1 + "" + positionY;
-        }
-        if (positionY == 1) {
-          gauche = `${positionX}${positionY}`;
-        } else {
-          gauche = `${positionX}${positionY - 1}`;
-        }
+    }
     
-        if (positionY == 10) {
-          droite = `${positionX}${positionY}`;
-        } else {
-          droite = `${positionX}${positionY + 1}`;
-        }
-    
-        console.log("Retourne joueur haut" + haut);
-        console.log("Retourne joueur bas" + bas);
-        console.log("Retourne joueur droite" + droite);
-        console.log("Retourne joueur gauche " + gauche);
-    
-        if (this.getCaseById(haut).indexOf("joueur") != -1) {
-          trouveJoueur = 1;
-        } else if (this.getCaseById(bas).indexOf("joueur") != -1) {
-          trouveJoueur = 1;
-        } else if (this.getCaseById(droite).indexOf("joueur") != -1) {
-          trouveJoueur = 1;
-        } else if (this.getCaseById(gauche).indexOf("joueur") != -1) {
-          trouveJoueur = 1;
-        }
-    
-        return trouveJoueur;
-      }
-
-
-
-
-
-
 }

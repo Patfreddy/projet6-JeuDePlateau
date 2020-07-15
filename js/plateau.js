@@ -69,6 +69,7 @@ class Plateau {
     
         if (elementClasse === "joueur") {
           positionJoueur = rechercheCaseEtat.recherchePositionJoueur(posX, posY);
+        
           console.log("Retourne joueur position : " + positionJoueur);
         }
       } while (caseEtat != "vide" || positionJoueur == 1);
@@ -88,7 +89,11 @@ class Plateau {
       }
     }
     console.log(tabCases);
+    
+
   }
+
+  
 
   selectionArme() {
     let armeEcran = new Arme(1);
