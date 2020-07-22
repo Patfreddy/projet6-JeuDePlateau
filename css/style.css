@@ -86,7 +86,7 @@ body {
  
 }
 
-p{
+p,h4 {
     margin: 10px;
 }
 #conteneur

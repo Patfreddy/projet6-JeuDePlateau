@@ -7,6 +7,7 @@
     <title>JeuDePlateau</title>
 
     <link href="css/style.css" rel="stylesheet">
+   
 
 </head>
 
@@ -20,25 +21,29 @@
             
             <div class="joueurs align-self-center">
                 <div id="joueur1" class="personnage">
-                    <h1 class="nomJoueur">Jade</h1>
+                    <h1 class="nomJoueurJ1">Jade</h1>
                     <img src="image/joueur1.png" class="imageJoueur">
-                    <img src="image/vert.png" class="imageArme">
-                    <p>Points de vie: 100</p>
+                    <img src="image/arme5.png" class="imageArme">
+                    <p class="nom-arme-joueur1">Vert - Dégâts : 10 points</p>
+                    <h4 class="point-de-vie-joueur1">Points de vie : 100</h4>
                     <br>
 
                 </div>
                 <div id="joueur2" class="personnage">
-                    <h1 class="nomJoueur">Sylvain</h1>
+                    <h1 class="nomJoueurJ2">Sylvain</h1>
                     <img src="image/joueur1.png" class="imageJoueur">
-                    <img src="image/vert.png" class="imageArme">
-                    <p>Points de vie: 100</p>
+                    <img src="image/arme5.png" class="imageArme">
+                    <p class="nom-arme-joueur2">Vert - Dégâts : 10 points</p>
+                    <h4 class="point-de-vie-joueur2">Points de vie : 100</h4>
                     <br>
 
                 </div>
                 
             </div>
         </section>
+
         
+      
         <section class="plateau">
             <table id="dessin_du_plateau">
               
@@ -48,44 +53,50 @@
         <section class="arme">
             <div id="valeur_armes">
                 <div>
-                    <img src="image/arme1.png" class="imageArme">
-                    <p class="nom_arme">Rose</p>
-                    <h4>Degat : 10 points</h4>
-                </div>
-                <div>
                     <img src="image/arme2.png" class="imageArme">
-                    <p class="nom_arme">bleue</p>
-                    <h4>Degat : 15 points</h4>
+                    <p class="nom_arme">Rose</p>
+                    <h4>Dégâts  : 15 points</h4>
                 </div>
                 <div>
                     <img src="image/arme3.png" class="imageArme">
-                    <p class="nom_arme">jaune</p>
-                    <h4>Degat : 20 points</h4>
+                    <p class="nom_arme">Bleue</p>
+                    <h4>Dégâts  : 20 points</h4>
                 </div>
                 <div>
                     <img src="image/arme4.png" class="imageArme">
+                    <p class="nom_arme">Jaune</p>
+                    <h4>Dégâts : 25 points</h4>
+                </div>
+                <div>
+                    <img src="image/arme5.png" class="imageArme">
                     <p class="nom_arme">Rouge</p>
-                    <h4>Degat : 25 points</h4>
+                    <h4>Dégâts : 30 points</h4>
                 </div>
 
             </div>
             
         </section>
 
+        <div id="dialog-confirm" title="Changer d'armes">
+            Voulez vous changer d'armes ?
+        </div>
+        
+
     </div>
 
-  
-    
+   
 
 
 
     <script src='js/jquery.js' type='text/javascript'></script>
+    <script src="js/jquery-ui.js" type='text/javascript'></script>
     <script src='js/arme.js' type='text/javascript'></script>
     <script src='js/case.js' type='text/javascript'></script>
     <script src='js/joueur.js' type='text/javascript'></script>
     <script src='js/global.js' type='text/javascript'></script>   
     <script src='js/plateau.js' type='text/javascript'></script>
     <script src='js/app.js' type='text/javascript'></script>
+    
     
 </body>
 
