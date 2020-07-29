@@ -1,9 +1,11 @@
 class Joueur {
-  constructor(idJoueur, nomJoueur, pointDeVie, armeJoueur) {
+  constructor(idJoueur, nomJoueur, armeJoueur,couleurFond,actif) {
     this.idjoueur = idJoueur;
     this.nomJoueur = nomJoueur;
-    this.pointDeVie = pointDeVie;
+    this.pointDeVie = 100;
     this.armeJoueur = armeJoueur;
+    this.couleurFond = couleurFond;
+    this.actif = actif;
   }
 
  
@@ -15,7 +17,7 @@ class Joueur {
 
   /*méthode pour controler la position du deuxième joueur */
   recherchePositionJoueur(positionX, positionY) {
-    console.log("Retourne joueur :" + positionX, positionY);
+   
     let trouveJoueur = 0;
     let haut = `${positionX}${positionY}`;
     let bas = `${positionX}${positionY}`;
@@ -51,8 +53,8 @@ class Joueur {
   }
 
   /*methode pour afficher les cases de déplacement du joueur */
-  casePossibleDeplacementJoueur(posxy, condition, ajouter, coordonnee, positionX, positionY, couleurFond, numJoueur) {
-    console.log(`en paramètre :${posxy} ${condition} ${ajouter} ${coordonnee} ${positionX} ${positionY} ${couleurFond}`);
+  casePossibleDeplacementJoueur(posxy, condition, ajouter, coordonnee, positionX, positionY) {
+ 
     let positionJoueur = posxy;
     let conditionControle = condition;
     let ajouterValeur = ajouter;
@@ -60,12 +62,11 @@ class Joueur {
     let posDeplacement = 0;
     let posX = positionX;
     let posY = positionY;
-    let joueurCaseNum = numJoueur;
     let caseXY = new Case();
 
     if (coordonnee == "X") {
       posDeplacement = posX;
-      console.log(`en après test : ${coordonnee} ${conditionControle} ${posDeplacement}`);
+     
     } else {
       posDeplacement = posY;
     }
@@ -73,7 +74,7 @@ class Joueur {
     for (let index = 0; index < 3; index++) {
       if (positionJoueur != conditionControle) {
         posDeplacement = posDeplacement + ajouterValeur;
-        console.log(`en après test :${positionJoueur} ${conditionControle} ${posDeplacement}`);
+      
       }
 
       if (coordonnee == "X") {
@@ -84,13 +85,11 @@ class Joueur {
         posY = posDeplacement;
       }
       let etatCase = caseXY.getCaseById(`${posX}${posY}`);
-      console.log("etat case" + etatCase + " posX = " + posX + " posY = " + posY);
+   
       if (etatCase[0] == "v" || etatCase[0] == "a") {
-        caseXY.modifierCouleurFondCase(`${posX}${posY}`, `${couleurFond}`);
-        caseXY.modifieTitleCase(`${posX}${posY}`, `${joueurCaseNum}`);
-        console.log(
-          "change le data de la case " + `${posX}${posY}` + `${joueurCaseNum}`
-        );
+        caseXY.modifierCouleurFondCase(`${posX}${posY}`, `${this.couleurFond}`);
+        caseXY.modifieTitleCase(`${posX}${posY}`, `${this.nomJoueur}`);
+       
       } else {
         break;
       }
@@ -99,8 +98,8 @@ class Joueur {
   }
 
   /*methode pour afficher les cases de déplacement du joueur  haut, bas, gauche, droite */
-  possibleDeplacementJoueur(positionX, positionY, nombreCaseDeplacement, personnage, couleurFond) {
-    console.log("1er deplacement  joueur :" + positionX, positionY);
+  possibleDeplacementJoueur(positionX, positionY, nombreCaseDeplacement) {
+   
 
     let posXDeplacement = positionX;
     let posYDeplacement = positionY;
@@ -110,55 +109,64 @@ class Joueur {
     let gauche = posYDeplacement;
 
     /*deplacement vers le haut*/
-    this.casePossibleDeplacementJoueur(haut,1,-1,"X",positionX,positionY,couleurFond,personnage);
+    this.casePossibleDeplacementJoueur(haut,1,-1,"X",positionX,positionY);
 
     /*deplacement vers le bas*/
-    this.casePossibleDeplacementJoueur(bas,10,+1,"X",positionX,positionY,couleurFond,personnage);
+    this.casePossibleDeplacementJoueur(bas,10,+1,"X",positionX,positionY);
 
     /*deplacement vers la gauche */
-    this.casePossibleDeplacementJoueur(gauche,1,-1,"Y",positionX,positionY,couleurFond,personnage);
+    this.casePossibleDeplacementJoueur(gauche,1,-1,"Y",positionX,positionY);
 
     /*deplacement vers la droite */
-    this.casePossibleDeplacementJoueur(droite,10,+1,"Y",positionX,positionY,couleurFond,personnage);
+    this.casePossibleDeplacementJoueur(droite,10,+1,"Y",positionX,positionY);
   }
 
 /* Methode pour verifier le deplacement du joueur*/
-  verificationCaseDeplacementJoueur(anciennePositionJoueur,caseCliquerUtilisateurNouvellePosition, tourDuJoueurCaseCliquer) {
-    console.log(`le joueur : ${tourDuJoueurCaseCliquer} ;  case cliquez : ${caseCliquerUtilisateurNouvellePosition}` )
+  verificationCaseDeplacementJoueur(anciennePositionJoueur,nouvellePositionJoueur, joueurEnCour,armeJoueur) {
+   
 
-      let changeCase = new Case;
+      let changeCase = new Case();
       let nouvelleArme = null;
-      let changeNouvelleArme = new Arme;
-      let couleurTourDuJoueurCaseCliquer = $("."+tourDuJoueurCaseCliquer).css("background-color");
-      let CouleurcaseCliquerUtilisateur = this.rechercheCouleurFondCase(caseCliquerUtilisateurNouvellePosition);
+      let ancienneArme = joueurEnCour;
+   
+      let couleurJoueurEnCour = $("."+joueurEnCour).css("background-color");
+     
+      let CouleurcaseCliquerUtilisateur = this.rechercheCouleurFondCase(nouvellePositionJoueur);
 
-    console.log(`couleur du joueur : ${couleurTourDuJoueurCaseCliquer} ; couleur de la case claiquez : ${CouleurcaseCliquerUtilisateur}` )
-    if(CouleurcaseCliquerUtilisateur == couleurTourDuJoueurCaseCliquer){
+   
+    if(CouleurcaseCliquerUtilisateur === couleurJoueurEnCour){
 
-        nouvelleArme = changeCase.getCaseById(caseCliquerUtilisateurNouvellePosition);
-        if(nouvelleArme[0] == "a"){
-           
-            
+        nouvelleArme = changeCase.getCaseById(nouvellePositionJoueur);
+        if(nouvelleArme[0] === "a"){
+                       
             if(this.confirmeChangementArme()){
-
-                changeNouvelleArme.changerArme(tourDuJoueurCaseCliquer,anciennePositionJoueur,caseCliquerUtilisateurNouvellePosition,nouvelleArme[4]);
-
+               
+               
+                
+                let changeNouvelleArme = new Arme(parseInt(nouvelleArme[4]));
+                changeNouvelleArme.changerArme(joueurEnCour,anciennePositionJoueur,nouvellePositionJoueur,armeJoueur);
+                
+                
               
+                              
             };
           
         }   
        
     /*alert(`${anciennePositionJoueur}` `${caseCliquerUtilisateur}` `${tourDuJoueurCaseCliquer}`);*/
-        this.changePositionJoueur(`${anciennePositionJoueur}`,`${caseCliquerUtilisateurNouvellePosition}`,`${tourDuJoueurCaseCliquer}`);
+        this.changePositionJoueur(`${anciennePositionJoueur}`,`${nouvellePositionJoueur}`,`${joueurEnCour}`);
 
-     
+    
         let [idJoueur1X,idjoueur1Y] = changeCase.getCaseByEtat("joueur1");
         let [idJoueur2X,idjoueur2Y] = changeCase.getCaseByEtat("joueur2");     
         changeCase.couleurCaseParDefaut(`${idJoueur1X}${idjoueur1Y}`,`${idJoueur2X}${idjoueur2Y}`);
+
+       return true;
         
     } else{
 
         alert("Vous ne pouvez pas aller sur cette case !");
+        return false;
     }
 
 
@@ -173,21 +181,95 @@ class Joueur {
 
     changeCase.modifieEtatTabCases(anciennePosition,"vide");
     changeCase.modifieEtatTabCases(nouvellePosition,joueur)
-    console.log(tabCases);
+   
   }
     
 /*Methode confirme changer arme*/
-  confirmeChangementArme() {
+confirmeChangementArme() {
                 let txt;
                 let changeArme = confirm("Voulez vous changer d'arme ?");
                 if (changeArme == true) {
-                  alert("You pressed OK!");
+                    
+                    armePositionne.positionneArmeTableau()
                   return true;
+
                 } else {
-                  alert("You pressed Cancel!");
+               
                   return false;
                 }
                
               }
+
+changeArmeJoueur(numeroJoueur,arme){
+    numeroJoueur.arme = arme;
+}
+
+prochainJoueur(joueur1,joueur2){
+
+    let tabJoueurs = [joueur1,joueur2];
+   
+
+    for (let nouveauJoueur of tabJoueurs) {
+    
+        if(nouveauJoueur.actif===true){
+              tourDuJoueur = nouveauJoueur;
+        } else {
+              prochainJoueur = nouveauJoueur;
+        
+        }  
+      } 
+  
+   
+    let [posX, posY] = caseJoueur.getCaseByEtat(tourDuJoueur.nomJoueur);
+    tourDuJoueur.possibleDeplacementJoueur(posX, posY, 3);
+   
+      
+     
+
+}
+
+jouer(joueur1,joueur2,caseCliquer){
+
+    let tabJoueurs = [joueur1,joueur2];
+   
+
+    for (let nouveauJoueur of tabJoueurs) {
+    
+        if(nouveauJoueur.actif===true){
+              tourDuJoueur = nouveauJoueur;
+        } else {
+              prochainJoueur = nouveauJoueur;
+        
+        }  
+      } 
+let [posX, posY] = caseJoueur.getCaseByEtat(tourDuJoueur.nomJoueur);
+// Gestionnaire d'évènement unique pour l'ensemble des <td>
+/*let caseCliquer = evenement.target;    */      
+
+let returnDeplacement = tourDuJoueur.verificationCaseDeplacementJoueur(
+`${posX}${posY}`,
+caseCliquer.id,
+tourDuJoueur.nomJoueur,
+tourDuJoueur.armeJoueur
+);
+
+if (returnDeplacement === true){         
+
+prochainJoueur.actif = true;
+tourDuJoueur.actif = false;    
+
+
+this.prochainJoueur(prochainJoueur,tourDuJoueur);
+ 
+} 
+};
+
+
+  
+      
+ 
+
+
+
 
 }

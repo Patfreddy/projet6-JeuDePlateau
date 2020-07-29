@@ -31,7 +31,7 @@ class Plateau {
       ligne += `</tr>`;
       $("#dessin_du_plateau").append(ligne);
     }
-    console.log(tabCases);
+  
   }
 
   /*Position des éléments dans le plateau*/
@@ -57,7 +57,7 @@ class Plateau {
             posY
           );
 
-          console.log("Retourne joueur position : " + positionJoueur);
+         
         }
       } while (caseEtat != "vide" || positionJoueur == 1);
 
@@ -66,8 +66,11 @@ class Plateau {
         rechercheCaseEtat.modifieEtatTabCases(
           `${posX}${posY}`,
           `${elementClasse}${caseOccupe + 1}`
+         
         );
-        console.log(elementClasse + (caseOccupe + 1));
+        if(elementClasse === "arme"){
+          tabArme.push( `${posX}${posY}`);
+        }
       } else {
         /*$(`#${posX}${posY}`).attr("class", `${elementClasse}`);*/
         rechercheCaseEtat.modifieEtatTabCases(
@@ -75,10 +78,10 @@ class Plateau {
           `${elementClasse}`
         );
 
-        console.log(elementClasse);
+       
       }
     }
-    console.log(tabCases);
+   
   }
 
   selectionArme() {

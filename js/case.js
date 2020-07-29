@@ -64,6 +64,6 @@ class Case {
  /*Modifier le titre d'une cellule*/
   modifieTitleCase(id,changeClass){
     $(`#${id}`).attr("data-case", changeClass);
-    console.log($(`#${id}`).attr("data_case"));
+   
   }    
 }

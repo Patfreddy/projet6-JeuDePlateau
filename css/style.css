@@ -1,5 +1,5 @@
 body {
-    background-image: url('../css/images/background2.jpg');
+    background-image: url('../image/background.jpg');
     background-size: cover;
     font-family: georgia;
     background-color: rgba(255,255,255,0.2);    
@@ -52,7 +52,7 @@ body {
 	margin: 0px 10px 10px 0px;
 }
 
-.imageArme {
+.imageArme, .imageArme1, .imageArme2, .imageArme3, .imageArme4,.imageArme-joueur1, .imageArme-joueur2 {
 	width: 60px;
     height: auto;
     padding-right: 5px;
@@ -118,7 +118,7 @@ p,h4 {
     height: 30px;
     width: 30px;
     background-size: cover;
-    background-image: url('../image/joueur1.png');
+    background-image: url('../image/joueur.png');
     background-color:#5C6215;
 }
 .joueur2{
@@ -127,8 +127,17 @@ p,h4 {
     height: 30px;
     width: 30px;
     background-size: cover;
-    background-image: url('../image/joueur1.png');
+    background-image: url('../image/joueur.png');
     background-color: #E46102;
+}
+.arme0{
+    padding: 10px;
+    border: 1px solid black;
+    height: 30px;
+    width: 30px;
+    background-size: cover;
+    background-image: url('../image/arme0.png');
+  
 }
 .arme1{
     padding: 10px;
@@ -188,6 +197,16 @@ p,h4 {
     background-color: #DBCBB4;
     z-index: 3;
   }
+
+#jouer{
+    width: 700px;
+    border: 2px black solid;
+    margin: auto;
+    position: relative;
+    background-color: #DBCBB4;
+    z-index: 3;
+
+}
  
 .choix{
     background-color: #9D4318;
