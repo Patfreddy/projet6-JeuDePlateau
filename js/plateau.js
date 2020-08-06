@@ -8,9 +8,9 @@ class Plateau {
     this.nombreDeplacementMin = 1;
     this.nombreDeplacementMax = 3;
     this.dessinerPlateau();
-    this.positionElement(nombreCaseInaccessible, "inaccesible");
-    this.positionElement(nombreJoueur, "joueur");
-    this.positionElement(nombreArme, "arme");
+    this.positionObjet(tabArme);
+    this.positionObjet(tabJoueur);
+    this.positionObjet(tabInaccessible);
     this.selectionArme();
   }
 
@@ -34,55 +34,53 @@ class Plateau {
   
   }
 
-  /*Position des éléments dans le plateau*/
-  positionElement(nombreElement, elementClasse) {
+
+  positionObjet(tableau){
     let posX = 0;
     let posY = 0;
+    let newCasePosition = new Case();
     let caseEtat = "vide";
-    let rechercheCaseEtat = new Case();
-    let rechercheCaseEtatJoueur = new Joueur();
     let positionJoueur = 0;
+    console.log(tabCases);
+    console.log(tableau);
+    tableau.forEach(element => {
 
-    for (let caseOccupe = 0; caseOccupe < nombreElement; caseOccupe++) {
-      positionJoueur = 0;
       do {
         posX = Math.floor(Math.random() * this.nombreDeLigne) + 1;
         posY = Math.floor(Math.random() * this.nombreDeColonne) + 1;
 
-        caseEtat = rechercheCaseEtat.getCaseById(`${posX}${posY}`);
-
-        if (elementClasse === "joueur") {
-          positionJoueur = rechercheCaseEtatJoueur.recherchePositionJoueur(
+        caseEtat = newCasePosition.getCaseById(`${posX}${posY}`);     
+        if (element.nom === "joueur") {
+          positionJoueur = element.recherchePositionJoueur(
             posX,
             posY
           );
-
-         
         }
-      } while (caseEtat != "vide" || positionJoueur == 1);
-
-      if (elementClasse === "joueur" || elementClasse === "arme") {
-        /*$(`#${posX}${posY}`).attr("class", `${elementClasse}${caseOccupe + 1}`);*/
-        rechercheCaseEtat.modifieEtatTabCases(
-          `${posX}${posY}`,
-          `${elementClasse}${caseOccupe + 1}`
-         
+        
+      } while (caseEtat != "vide"|| positionJoueur == 1);
+      
+    
+      newCasePosition.modifieEtatTabCases(
+          `${posX}${posY}`,element.nom          
         );
-        if(elementClasse === "arme"){
-          tabArme.push( `${posX}${posY}`);
-        }
-      } else {
-        /*$(`#${posX}${posY}`).attr("class", `${elementClasse}`);*/
-        rechercheCaseEtat.modifieEtatTabCases(
-          `${posX}${posY}`,
-          `${elementClasse}`
-        );
+      
+    });
 
-       
-      }
-    }
-   
+
   }
+
+  CaseById(idCase) {
+    let caseFind = null;
+    tabCases.forEach((uneCase) => {
+      if (uneCase.idCase == idCase) {
+        caseFind = uneCase.etat;
+      }
+    });
+    return caseFind;
+  }
+
+ 
+  
 
   selectionArme() {
     let armeEcran = new Arme(1);

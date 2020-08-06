@@ -1,7 +1,7 @@
 class Joueur {
-  constructor(idJoueur, nomJoueur, armeJoueur,couleurFond,actif) {
+  constructor(idJoueur, nom, armeJoueur,couleurFond,actif) {
     this.idjoueur = idJoueur;
-    this.nomJoueur = nomJoueur;
+    this.nom = nom;
     this.pointDeVie = 100;
     this.armeJoueur = armeJoueur;
     this.couleurFond = couleurFond;
@@ -14,7 +14,30 @@ class Joueur {
   rechercheCouleurFondCase(idCase){
     return $(`#${idCase}`).css("background-color");
   }
+  /*Méthode pour retrouver la position d'un element en fonction de son etat : joueurs ou armes*/
+ getCaseByEtat(etat) {
+  let caseFindEtatPosX;
+  let caseFindEtatPosY;
+  tabCases.forEach((uneCase) => {
+    if (uneCase.etat == etat) {
+      caseFindEtatPosX = uneCase.posX;
+      caseFindEtatPosY = uneCase.posY;
+    }
+  });
+  return [caseFindEtatPosX,caseFindEtatPosY];
+}
 
+
+
+
+
+  /*Méthode pour remettre par defaut la couleur de fond de toutes les cases*/
+  couleurCaseParDefaut(caseJoueur1,caseJoueur2){
+    $('td').css("background-color", "#dbcbbd");
+  
+    caseJoueur.modifierCouleurFondCase(`${caseJoueur1}`,"#5C6215");
+    caseJoueur.modifierCouleurFondCase(`${caseJoueur2}`,"#E46102");
+    }
   /*méthode pour controler la position du deuxième joueur */
   recherchePositionJoueur(positionX, positionY) {
    
@@ -23,7 +46,7 @@ class Joueur {
     let bas = `${positionX}${positionY}`;
     let droite = `${positionX}${positionY}`;
     let gauche = `${positionX}${positionY}`;
-    let caseXY = new Case();
+   
 
     if (positionX != 1) {
       haut = `${positionX - 1}${positionY}`;
@@ -39,13 +62,13 @@ class Joueur {
       droite = `${positionX}${positionY + 1}`;
     }
 
-    if (caseXY.getCaseById(haut).indexOf("joueur") != -1) {
+    if (this.getCaseById(haut).indexOf("joueur") != -1) {
       trouveJoueur = 1;
-    } else if (caseXY.getCaseById(bas).indexOf("joueur") != -1) {
+    } else if (this.getCaseById(bas).indexOf("joueur") != -1) {
       trouveJoueur = 1;
-    } else if (caseXY.getCaseById(droite).indexOf("joueur") != -1) {
+    } else if (this.getCaseById(droite).indexOf("joueur") != -1) {
       trouveJoueur = 1;
-    } else if (caseXY.getCaseById(gauche).indexOf("joueur") != -1) {
+    } else if (this.getCaseById(gauche).indexOf("joueur") != -1) {
       trouveJoueur = 1;
     }
 
@@ -53,16 +76,14 @@ class Joueur {
   }
 
   /*methode pour afficher les cases de déplacement du joueur */
-  casePossibleDeplacementJoueur(posxy, condition, ajouter, coordonnee, positionX, positionY) {
+  casePossibleDeplacementJoueur(positionJoueur, conditionControle, ajouterValeur, coordonnee, positionX, positionY) {
  
-    let positionJoueur = posxy;
-    let conditionControle = condition;
-    let ajouterValeur = ajouter;
-    let posXouY = coordonnee;
+    
     let posDeplacement = 0;
     let posX = positionX;
     let posY = positionY;
-    let caseXY = new Case();
+    let etatCase ="";
+  
 
     if (coordonnee == "X") {
       posDeplacement = posX;
@@ -84,11 +105,12 @@ class Joueur {
         posX = posX;
         posY = posDeplacement;
       }
-      let etatCase = caseXY.getCaseById(`${posX}${posY}`);
+      console.log(`${posX}${posY}`);
+      etatCase = caseJoueur.getCaseById(`${posX}${posY}`);
    
       if (etatCase[0] == "v" || etatCase[0] == "a") {
-        caseXY.modifierCouleurFondCase(`${posX}${posY}`, `${this.couleurFond}`);
-        caseXY.modifieTitleCase(`${posX}${posY}`, `${this.nomJoueur}`);
+        caseJoueur.modifierCouleurFondCase(`${posX}${posY}`, `${this.couleurFond}`);
+        /*caseJoueur.modifieTitleCase(`${posX}${posY}`, `${this.nom}`);*/
        
       } else {
         break;
@@ -125,7 +147,7 @@ class Joueur {
   verificationCaseDeplacementJoueur(anciennePositionJoueur,nouvellePositionJoueur, joueurEnCour,armeJoueur) {
    
 
-      let changeCase = new Case();
+   
       let nouvelleArme = null;
       let ancienneArme = joueurEnCour;
    
@@ -136,7 +158,7 @@ class Joueur {
    
     if(CouleurcaseCliquerUtilisateur === couleurJoueurEnCour){
 
-        nouvelleArme = changeCase.getCaseById(nouvellePositionJoueur);
+        nouvelleArme = caseJoueur.getCaseById(nouvellePositionJoueur);
         if(nouvelleArme[0] === "a"){
                        
             if(this.confirmeChangementArme()){
@@ -145,10 +167,7 @@ class Joueur {
                 
                 let changeNouvelleArme = new Arme(parseInt(nouvelleArme[4]));
                 changeNouvelleArme.changerArme(joueurEnCour,anciennePositionJoueur,nouvellePositionJoueur,armeJoueur);
-                
-                
-              
-                              
+      
             };
           
         }   
@@ -157,9 +176,9 @@ class Joueur {
         this.changePositionJoueur(`${anciennePositionJoueur}`,`${nouvellePositionJoueur}`,`${joueurEnCour}`);
 
     
-        let [idJoueur1X,idjoueur1Y] = changeCase.getCaseByEtat("joueur1");
-        let [idJoueur2X,idjoueur2Y] = changeCase.getCaseByEtat("joueur2");     
-        changeCase.couleurCaseParDefaut(`${idJoueur1X}${idjoueur1Y}`,`${idJoueur2X}${idjoueur2Y}`);
+        let [idJoueur1X,idjoueur1Y] = this.getCaseByEtat("joueur1");
+        let [idJoueur2X,idjoueur2Y] = this.getCaseByEtat("joueur2");     
+        this.couleurCaseParDefaut(`${idJoueur1X}${idjoueur1Y}`,`${idJoueur2X}${idjoueur2Y}`);
 
        return true;
         
@@ -180,7 +199,7 @@ class Joueur {
     let changeCase = new Case;
 
     changeCase.modifieEtatTabCases(anciennePosition,"vide");
-    changeCase.modifieEtatTabCases(nouvellePosition,joueur)
+    changeCase.modifieEtatTabCases(nouvellePosition,joueur);
    
   }
     
@@ -204,12 +223,12 @@ changeArmeJoueur(numeroJoueur,arme){
     numeroJoueur.arme = arme;
 }
 
-prochainJoueur(joueur1,joueur2){
+prochainJoueur(){
 
-    let tabJoueurs = [joueur1,joueur2];
-   
 
-    for (let nouveauJoueur of tabJoueurs) {
+   console.log(tabJoueur);
+
+    for (let nouveauJoueur of tabJoueur) {
     
         if(nouveauJoueur.actif===true){
               tourDuJoueur = nouveauJoueur;
@@ -219,8 +238,9 @@ prochainJoueur(joueur1,joueur2){
         }  
       } 
   
-   
-    let [posX, posY] = caseJoueur.getCaseByEtat(tourDuJoueur.nomJoueur);
+      console.log(tourDuJoueur.nom);
+    let [posX, posY] = this.getCaseByEtat(tourDuJoueur.nom);
+    console.log(posX, posY, 3);
     tourDuJoueur.possibleDeplacementJoueur(posX, posY, 3);
    
       
@@ -242,14 +262,14 @@ jouer(joueur1,joueur2,caseCliquer){
         
         }  
       } 
-let [posX, posY] = caseJoueur.getCaseByEtat(tourDuJoueur.nomJoueur);
+let [posX, posY] = this.getCaseByEtat(tourDuJoueur.nom);
 // Gestionnaire d'évènement unique pour l'ensemble des <td>
 /*let caseCliquer = evenement.target;    */      
 
 let returnDeplacement = tourDuJoueur.verificationCaseDeplacementJoueur(
 `${posX}${posY}`,
 caseCliquer.id,
-tourDuJoueur.nomJoueur,
+tourDuJoueur.nom,
 tourDuJoueur.armeJoueur
 );
 
@@ -263,13 +283,5 @@ this.prochainJoueur(prochainJoueur,tourDuJoueur);
  
 } 
 };
-
-
-  
-      
- 
-
-
-
 
 }

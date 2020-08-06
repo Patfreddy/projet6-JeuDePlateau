@@ -76,7 +76,7 @@ body {
     width: 30px;
     background-color: #DBCBB4;
 }
-.inaccesible{
+.inaccessible{
     padding: 10px;
     border: 1px solid black;
     height: 30px;
@@ -130,7 +130,7 @@ p,h4 {
     background-image: url('../image/joueur.png');
     background-color: #E46102;
 }
-.arme0{
+.armeVert{
     padding: 10px;
     border: 1px solid black;
     height: 30px;
@@ -139,7 +139,7 @@ p,h4 {
     background-image: url('../image/arme0.png');
   
 }
-.arme1{
+.armeRose{
     padding: 10px;
     border: 1px solid black;
     height: 30px;
@@ -148,7 +148,7 @@ p,h4 {
     background-image: url('../image/arme1.png');
   
 }
-.arme2{
+.armeBleue{
     padding: 10px;
     border: 1px solid black;
     height: 30px;
@@ -157,7 +157,7 @@ p,h4 {
     background-image: url('../image/arme2.png');
   
 }
-.arme3{
+.armeJaune{
     padding: 10px;
     border: 1px solid black;
     height: 30px;
@@ -166,7 +166,7 @@ p,h4 {
     background-image: url('../image/arme3.png');
   
 }
-.arme4{
+.armeRouge{
     padding: 10px;
     border: 1px solid black;
     height: 30px;
