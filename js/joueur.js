@@ -1,10 +1,12 @@
 class Joueur {
-  constructor(idJoueur, nom, armeJoueur,couleurFond,actif) {
+  constructor(idJoueur, nom,prenom,armeJoueur,couleurFond,imageJoueur,actif) {
     this.idjoueur = idJoueur;
     this.nom = nom;
+    this.prenom = prenom;
     this.pointDeVie = 100;
     this.armeJoueur = armeJoueur;
     this.couleurFond = couleurFond;
+    this.imageJoueur = imageJoueur;
     this.actif = actif;
   }
 
@@ -205,6 +207,9 @@ class Joueur {
     
 /*Methode confirme changer arme*/
 confirmeChangementArme() {
+  let nomArme = joueur.armeJoueur;
+  let degatArme = joueur.arme.degat;
+
                 let txt;
                 let changeArme = confirm("Voulez vous changer d'arme ?");
                 if (changeArme == true) {

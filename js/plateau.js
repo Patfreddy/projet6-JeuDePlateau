@@ -8,10 +8,15 @@ class Plateau {
     this.nombreDeplacementMin = 1;
     this.nombreDeplacementMax = 3;
     this.dessinerPlateau();
-    this.positionObjet(tabArme);
+    this.creationJoueurPlateau();
+    this.creationArmePlateau(tabArme);
+    let tabArmePlateau = tabArme;
+    tabArmePlateau.shift();    
+    this.positionObjet(tabArmePlateau);
     this.positionObjet(tabJoueur);
     this.positionObjet(tabInaccessible);
     this.selectionArme();
+    
   }
 
   /*Dessin du plateau case par case d'état "vide"*/
@@ -32,6 +37,36 @@ class Plateau {
       $("#dessin_du_plateau").append(ligne);
     }
   
+  }
+  creationJoueurPlateau(){
+    tabJoueur.forEach(joueur => {
+      $('.joueurs').append(`     
+      <div id="joueur" class="personnage" style="background-color:${joueur.couleurFond}">
+          <h1 class="nomJoueur">${joueur.prenom}</h1>
+          <img src="image/${joueur.imageJoueur.chemin}" class="imageJoueur">
+          <img src="image/${joueur.armeJoueur.imageArme.chemin}" class="imageArme-joueur">
+          <p class="nom-arme-joueur">${joueur.armeJoueur.nom} - Dégâts : ${joueur.armeJoueur.degat}points</p>
+          <h4 class="point-de-vie-joueur">Points de vie : ${joueur.pointDeVie}"</h4>
+          <br>
+
+      </div>
+      `)
+      
+    });
+
+  }
+
+  creationArmePlateau(){
+    tabArme.forEach(arme => {
+  $('#valeur_armes').append(`
+  <div>
+     <img src="image/${arme.imageArme.chemin}" class="imageArme">
+     <p class="nom_arme">${arme.nom}</p>
+     <h4>Dégâts  : ${arme.degat} points</h4>
+  </div>
+          
+   `)
+});
   }
 
 
@@ -85,4 +120,5 @@ class Plateau {
   selectionArme() {
     let armeEcran = new Arme(1);
   }
+
 }

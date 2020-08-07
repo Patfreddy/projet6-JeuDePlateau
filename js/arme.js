@@ -1,12 +1,12 @@
 class Arme {
-  constructor(idArme,nom,degat,chemin,caseArme) {
+  constructor(idArme,nom,degat,imageArme,caseArme=null) {
 
     this.idArme = idArme;
     this.nom = nom;
     this.degat = degat;
-    this.chemin =chemin;
+    this.imageArme =imageArme;
     this.case = caseArme;
-    
+
   }
 
  
