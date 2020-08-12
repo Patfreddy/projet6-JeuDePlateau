@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  /*let joueur=[],*/
+ 
   let nbrLigne = 10;
   let nbrColonne = 10;
   let nbrCaseIinaccessible = 10;
@@ -12,7 +12,7 @@ $(document).ready(function () {
   let imageInaccessible = new Image(7, "rocher.png");
   let caseJoueur = new Case();
   let caseArme = new Case();
-  
+
   /* let caseInaccessible = {
     nom: "inaccessible",
     dCase :null
@@ -24,32 +24,8 @@ $(document).ready(function () {
   let armeJaune = new Arme(3, "armeJaune", 25, imageArmeJaune, caseArme);
   let armeRouge = new Arme(4, "armeRouge", 30, imageArmeRouge, caseArme);
 
-  joueur1 = new Joueur(
-    1,
-    "joueur1",
-    "Jade",
-    armeVert,
-    "#5C6215",
-    imageJoueur,
-    true,
-    caseJoueur,
-    "vide"
-  );
-  joueur2 = new Joueur(
-    2,
-    "joueur2",
-    "Sylvain",
-    armeVert,
-    "#E46102",
-    imageJoueur,
-    false,
-    caseJoueur,
-    "vide"
-  );
-
- 
-
- 
+  joueur1 = new Joueur(1,"joueur1","Jade",armeVert,"#5C6215",imageJoueur,true,caseJoueur);
+  joueur2 = new Joueur(2,"joueur2","Sylvain",armeVert,"#E46102",imageJoueur,false,caseJoueur);
 
   /* on ajoute l'arme par défaut*/
   tabArme.push(armeVert, armeRose, armeBleu, armeJaune, armeRouge);
@@ -58,40 +34,30 @@ $(document).ready(function () {
   console.log(tabArme);
   console.log(tabJoueur);
 
-  
-  
-  
   /* on créé le tableau*/
- plateau = new Plateau(nbrLigne, nbrColonne, nbrCaseIinaccessible);
+  plateau = new Plateau(nbrLigne, nbrColonne, nbrCaseIinaccessible);
 
   /*lancer une partie*/
   $("#jouer").on("click", function () {
-   
     joueur1.mouvementJoueur(3);
 
     $("td").on("click", function (evenement) {
-    let tabJoueurs = [joueur1, joueur2];
- 
-    for (let nouveauJoueur of tabJoueurs) {
-      if (nouveauJoueur.actif === true) {
-        joueurEnCour = nouveauJoueur;
-         
-      } else {
-        nouveauJoueur.actif = true;
-        prochainJoueur=nouveauJoueur;
-       
-      }
-    }
+      let tabJoueurs = [joueur1, joueur2];
 
-    if (joueurEnCour.jouer(evenement.target)=== true){
-      joueurEnCour.actif = false;
-      prochainJoueur.mouvementJoueur(3);
+      for (let nouveauJoueur of tabJoueurs) {
+        if (nouveauJoueur.actif === true) {
+          joueurEnCour = nouveauJoueur;
+        } else {
+          nouveauJoueur.actif = true;
+          prochainJoueur = nouveauJoueur;
+        }
+      }
+
+      if (joueurEnCour.jouer(evenement.target) === true) {
+        joueurEnCour.actif = false;
+        prochainJoueur.mouvementJoueur(3);
+      }
       
-      
-    }
-         /*  armePositionne.positionneArmeTableau();*/
     });
-    
-    
   });
 });

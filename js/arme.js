@@ -20,43 +20,5 @@ class Arme {
   return changeArmeJoueur;
 };
 
-/* 
-  changerArme(joueur,anciennePosition,nouvellePosition,ancienneArme){
-
-    let deposeArme = $(`nom-arme-${joueur}`);
-    let deposeArmeCase = new Case();
- 
-    
- 
-    tabArme[this.idArme]="0";
-    tabArme[ancienneArme[4]] = nouvellePosition;
-    tabJoueursArme[joueur[7]]=`${this.nom}`;
-    deposeArmeCase.modifieEtatTabCases();
-   
-
-   $(`.imageArme-${joueur}`).attr('src',`${this.chemin}`);
-   $(`.nom-arme-${joueur}`).html(`${this.nom} - ${this.degat}`);
-  
-  
-  
-   
-  }
-positionneArmeTableau(){
-  for(let i=0;i<5;i++){
-  
-    let getCase=getCaseById(tabArme[i]);
-    
-    if(getCase!= null){
-  
-    if(getCase[0]!="j"){
-   
-    caseArme.modifieEtatTabCases(tabArme[i],"arme"+i);
-  
-    }
-    }
-
-  }
-} */
-
 
 }
