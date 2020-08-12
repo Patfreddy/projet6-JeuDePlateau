@@ -126,6 +126,9 @@ p,h4 {
     background-image: url('../image/joueur.png');
     background-color:#5C6215;
 }
+#joueur1{
+    background-color:#5C6215;
+}
 .joueur2{
     padding: 10px;
     border: 1px solid black;
