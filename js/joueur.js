@@ -7,8 +7,7 @@ class Joueur {
     couleurFond,
     imageJoueur,
     actif,
-    dCase,
-    deposeArme="vide"
+    dCase
   ) {
     this.idjoueur = idJoueur;
     this.nom = nom;
@@ -19,6 +18,7 @@ class Joueur {
     this.imageJoueur = imageJoueur;
     this.actif = actif;
     this.dCase = dCase;
+    this.deposeArme="vide";
   }
 
   
@@ -44,9 +44,7 @@ class Joueur {
       this.dCase.posX,
       1,
       -1,
-      "X",
-      this.dCase.posX,
-      this.dCase.posY
+      "X"
     );
 
     /*deplacement vers le bas*/
@@ -54,9 +52,7 @@ class Joueur {
       this.dCase.posX,
       10,
       +1,
-      "X",
-      this.dCase.posX,
-      this.dCase.posY
+      "X"
     );
 
     /*deplacement vers la gauche */
@@ -65,8 +61,6 @@ class Joueur {
       1,
       -1,
       "Y",
-      this.dCase.posX,
-      this.dCase.posY
     );
 
     /*deplacement vers la droite */
@@ -74,9 +68,7 @@ class Joueur {
       this.dCase.posY,
       10,
       +1,
-      "Y",
-      this.dCase.posX,
-      this.dCase.posY
+      "Y"
     );
   }
 
@@ -126,10 +118,16 @@ class Joueur {
   
   let nouvelleCase = getCaseById(caseCliquer.id);
   let nouvelleArme = null;
-  let couleurJoueurEnCour = $(`.${this.nom}`).css("background-color");
+  console.log(`${this.nom}`);
+
+ 
+  let couleurJoueurEnCour = $(`.${this.nom}`).css("background-color"); /*$(`.joueur${this.idJoueur}`).css("background-color");*/
   let CouleurcaseCliquerUtilisateur = $(`#${nouvelleCase.idCase}`).css("background-color");
 
-
+  this.dCase.modifieEtatTabCases(this.deposeArme);
+  this.deposeArme="vide";
+  
+  console.log("couleur joueur en cour "+this.nom+" "+couleurJoueurEnCour+" et couleur fond case cliquer"+CouleurcaseCliquerUtilisateur);
  if (CouleurcaseCliquerUtilisateur === couleurJoueurEnCour) {
   this.deposeArme="vide";
     if (nouvelleCase.etat[0] === "a") {
@@ -143,7 +141,8 @@ class Joueur {
        
         // la nouvelle arme a son id null car recupérer par joueur
         nouvelleArme = this.armeJoueur.getArme(nouvelleCase.etat);
-        nouvelleArme.dCase = new Case();
+        /*nouvelleArme.dCase = new Case();*/
+        
         console.log(nouvelleArme);
 
         // le joueur récupère l'arme
@@ -233,14 +232,14 @@ class Joueur {
 
   changePositionJoueur(nouvellePosition) {
     console.log(this.deposeArme);
-    this.dCase.modifieEtatTabCases(this.deposeArme);
+   
     
     this.dCase = getCaseById(nouvellePosition);
     this.dCase.modifieEtatTabCases(this.nom);
-    
+    /*
     if (this.recherchePositionJoueur(this.dCase.posX, this.dCase.posY) === 1) {
       confirm("Souhaitez vous combatre ou vous défendre ?");
-    }
+    }*/
   }
   /*Methode confirme changer arme*/
   /*  confirmeChangementArme() {

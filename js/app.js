@@ -12,17 +12,17 @@ $(document).ready(function () {
   let imageInaccessible = new Image(7, "rocher.png");
   let caseJoueur = new Case();
   let caseArme = new Case();
-  let caseInaccessible = new Case(0, 0, 0, "inaccessible");
+  
   /* let caseInaccessible = {
     nom: "inaccessible",
     dCase :null
   }; */
-  let caseRocher = new Object();
+
   let armeVert = new Arme(0, "armeVert", 5, imageArmeVert, null);
   let armeRose = new Arme(1, "armeRose", 15, imageArmeRose, caseArme);
   let armeBleu = new Arme(2, "armeBleue", 20, imageArmeBleu, caseArme);
   let armeJaune = new Arme(3, "armeJaune", 25, imageArmeJaune, caseArme);
-  let armeRouge = new Arme(4, "armeRouge", 20, imageArmeRouge, caseArme);
+  let armeRouge = new Arme(4, "armeRouge", 30, imageArmeRouge, caseArme);
 
   joueur1 = new Joueur(
     1,
@@ -49,7 +49,7 @@ $(document).ready(function () {
 
  
 
-  let condition = true;
+ 
 
   /* on ajoute l'arme par défaut*/
   tabArme.push(armeVert, armeRose, armeBleu, armeJaune, armeRouge);
@@ -58,17 +58,7 @@ $(document).ready(function () {
   console.log(tabArme);
   console.log(tabJoueur);
 
-  /*creation de la table des rochers*/
-  function tabIna() {
-    for (let i = 0; i < nbrCaseIinaccessible; i++) {
-      caseRocher.dCase = caseInaccessible;
-      caseRocher.nom = "inaccessible";
-      tabInaccessible.push(caseRocher);
-           
-    }
-   
-  }
-  tabIna();
+  
   
   
   /* on créé le tableau*/
@@ -99,7 +89,7 @@ $(document).ready(function () {
       
       
     }
-           armePositionne.positionneArmeTableau();
+         /*  armePositionne.positionneArmeTableau();*/
     });
     
     

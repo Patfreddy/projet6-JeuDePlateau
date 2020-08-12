@@ -6,6 +6,7 @@ class Plateau {
     this.nombreCaseInaccessible = nombreCaseInaccessible;
     this.nombreDeplacementMin = 1;
     this.nombreDeplacementMax = 3;
+    this.creationRocher();
     this.dessinerPlateau();
     this.creationJoueurPlateau();
     this.creationArmePlateau(tabArme);
@@ -32,6 +33,16 @@ class Plateau {
     
   });
 
+}
+
+creationRocher(){
+for (let i = 0; i < this.nombreCaseInaccessible; i++) {
+  let caseRocher = {};
+  caseRocher.dCase = new Case(0, 0, 0, "inaccessible");
+  caseRocher.nom = "inaccessible";
+  tabInaccessible.push(caseRocher);
+       
+}
 }
 
 //Afficher dynamiquement les armes

@@ -20,7 +20,7 @@ class Arme {
   return changeArmeJoueur;
 };
 
-
+/* 
   changerArme(joueur,anciennePosition,nouvellePosition,ancienneArme){
 
     let deposeArme = $(`nom-arme-${joueur}`);
@@ -56,7 +56,7 @@ positionneArmeTableau(){
     }
 
   }
-}
+} */
 
 
 }
