@@ -23,6 +23,7 @@ $(document).ready(function () {
   let armeBleu = new Arme(2, "armeBleue", 20, imageArmeBleu, caseArme);
   let armeJaune = new Arme(3, "armeJaune", 25, imageArmeJaune, caseArme);
   let armeRouge = new Arme(4, "armeRouge", 30, imageArmeRouge, caseArme);
+  let tabJoueurs = [joueur1, joueur2];
 
   joueur1 = new Joueur(1,"joueur1","Jade",armeVert,"#5C6215",imageJoueur,true,caseJoueur);
   joueur2 = new Joueur(2,"joueur2","Sylvain",armeVert,"#E46102",imageJoueur,false,caseJoueur);
@@ -31,32 +32,40 @@ $(document).ready(function () {
   tabArme.push(armeVert, armeRose, armeBleu, armeJaune, armeRouge);
   tabArmePlateau.push(armeRose, armeBleu, armeJaune, armeRouge);
   tabJoueur.push(joueur1, joueur2);
-  console.log(tabArme);
-  console.log(tabJoueur);
-
+ 
   /* on créé le tableau*/
   plateau = new Plateau(nbrLigne, nbrColonne, nbrCaseIinaccessible);
 
   /*lancer une partie*/
   $("#jouer").on("click", function () {
+    let tabJoueurs = [joueur1, joueur2];
+    joueurEnCour = joueur1;
+    prochainJoueur = joueur2;
     joueur1.mouvementJoueur(3);
 
+  
     $("td").on("click", function (evenement) {
-      let tabJoueurs = [joueur1, joueur2];
-
-      for (let nouveauJoueur of tabJoueurs) {
-        if (nouveauJoueur.actif === true) {
-          joueurEnCour = nouveauJoueur;
-        } else {
-          nouveauJoueur.actif = true;
-          prochainJoueur = nouveauJoueur;
-        }
-      }
-
+    
+      
       if (joueurEnCour.jouer(evenement.target) === true) {
+    
         joueurEnCour.actif = false;
+        prochainJoueur.actif = true;
         prochainJoueur.mouvementJoueur(3);
-      }
+        joueurEnCour = prochainJoueur;
+
+        for (let nouveauJoueur of tabJoueurs) {
+          if (nouveauJoueur.actif === true) {
+            
+            joueurEnCour = nouveauJoueur;
+         
+          } else {
+            nouveauJoueur.actif = true;
+            prochainJoueur = nouveauJoueur;
+      
+          }
+        }
+      } 
       
     });
   });

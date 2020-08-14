@@ -87,12 +87,10 @@ class Joueur {
    
     let couleurJoueurEnCour = $(`.${this.nom}`).css("background-color"); /*$(`.joueur${this.idJoueur}`).css("background-color");*/
     let CouleurcaseCliquerUtilisateur = $(`#${nouvelleCase.idCase}`).css("background-color");
-
-    this.dCase.modifieEtatTabCases(this.deposeArme);
-    this.deposeArme = "vide";
-
-   
+ 
+       
     if (CouleurcaseCliquerUtilisateur === couleurJoueurEnCour) {
+      this.dCase.modifieEtatTabCases(this.deposeArme);
       this.deposeArme = "vide";
       if (nouvelleCase.etat[0] === "a") {
         if (confirm("Voulez vous changer d'arme ?") === true) {
